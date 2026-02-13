@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FairwayConnect - Golf Business Network</title>
+    <title>FairwayConnect - Where Golf Meets Business</title>
     <style>
         * {
             margin: 0;
@@ -11,13 +11,28 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --primary: #2e7d32;
+            --primary-light: #4caf50;
+            --primary-dark: #1b5e20;
+            --accent: #ff6f00;
+            --bg-dark: #0a0e1a;
+            --bg-card: #ffffff;
+            --text-primary: #1a1a1a;
+            --text-secondary: #666666;
+            --border: #e0e0e0;
+            --success: #4caf50;
+            --shadow: rgba(0,0,0,0.1);
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: #f5f5f5;
+            background: #f8f9fa;
             max-width: 430px;
             margin: 0 auto;
             height: 100vh;
             overflow: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
         .app-container {
@@ -25,17 +40,149 @@
             display: flex;
             flex-direction: column;
             background: white;
+            position: relative;
+        }
+
+        /* Landing Page */
+        .landing {
+            background: linear-gradient(135deg, var(--bg-dark) 0%, #1a2332 100%);
+            color: white;
+            height: 100vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .landing-hero {
+            padding: 60px 24px 40px;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(46, 125, 50, 0.2) 0%, rgba(76, 175, 80, 0.1) 100%);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(76, 175, 80, 0.2);
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            color: var(--primary-light);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .landing-logo {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .landing h1 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .landing-tagline {
+            font-size: 18px;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 32px;
+            line-height: 1.5;
+        }
+
+        .cta-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding: 0 24px;
+        }
+
+        .features-grid {
+            padding: 40px 24px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .feature-card {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 24px 16px;
+            text-align: center;
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            background: rgba(255,255,255,0.08);
+        }
+
+        .feature-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .feature-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .feature-desc {
+            font-size: 12px;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.4;
+        }
+
+        .social-proof {
+            padding: 40px 24px;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .stats-row {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 24px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary-light);
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: rgba(255,255,255,0.6);
+            margin-top: 4px;
         }
 
         /* Header */
         .header {
-            background: linear-gradient(135deg, #2e7d32 0%, #4caf50 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
             color: white;
             padding: 16px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 10;
         }
 
         .header h1 {
@@ -50,6 +197,26 @@
             font-size: 24px;
             cursor: pointer;
             padding: 4px;
+            transition: transform 0.2s;
+        }
+
+        .header-back:hover {
+            transform: scale(1.1);
+        }
+
+        .header-action {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+
+        .header-action:hover {
+            background: rgba(255,255,255,0.3);
         }
 
         /* Content Area */
@@ -57,78 +224,7 @@
             flex: 1;
             overflow-y: auto;
             padding-bottom: 70px;
-        }
-
-        /* Onboarding Screen */
-        .onboarding {
-            padding: 32px 24px;
-            text-align: center;
-        }
-
-        .logo {
-            font-size: 60px;
-            margin-bottom: 16px;
-        }
-
-        .onboarding h2 {
-            font-size: 28px;
-            color: #1a1a1a;
-            margin-bottom: 12px;
-        }
-
-        .onboarding p {
-            color: #666;
-            font-size: 16px;
-            line-height: 1.5;
-            margin-bottom: 32px;
-        }
-
-        /* Form Styles */
-        .form-group {
-            margin-bottom: 24px;
-            text-align: left;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 14px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 8px;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: border-color 0.3s;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #4caf50;
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 80px;
-        }
-
-        .checkbox-group {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 16px;
-        }
-
-        .checkbox-group input {
-            width: auto;
+            background: #f8f9fa;
         }
 
         /* Buttons */
@@ -141,38 +237,121 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #2e7d32 0%, #4caf50 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
             color: white;
+            box-shadow: 0 4px 12px rgba(46, 125, 50, 0.3);
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+            box-shadow: 0 6px 20px rgba(46, 125, 50, 0.4);
         }
 
         .btn-secondary {
-            background: #f5f5f5;
-            color: #333;
-            margin-top: 12px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
-        /* Profile Card */
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.15);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Form Styles */
+        .form-section {
+            padding: 24px;
+            background: white;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s;
+            background: #f8f9fa;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 16px;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        /* Profile Cards */
         .profile-card {
             background: white;
             border-radius: 16px;
             padding: 20px;
             margin: 16px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 12px var(--shadow);
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: all 0.3s;
+            border: 1px solid var(--border);
         }
 
         .profile-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
         }
 
         .profile-header {
@@ -182,10 +361,10 @@
         }
 
         .avatar {
-            width: 60px;
-            height: 60px;
+            width: 64px;
+            height: 64px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #4caf50, #2e7d32);
+            background: linear-gradient(135deg, var(--primary-light), var(--primary-dark));
             display: flex;
             align-items: center;
             justify-content: center;
@@ -193,28 +372,31 @@
             font-size: 24px;
             font-weight: 600;
             flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(46, 125, 50, 0.3);
         }
 
         .profile-info h3 {
             font-size: 18px;
-            color: #1a1a1a;
+            color: var(--text-primary);
             margin-bottom: 4px;
+            font-weight: 600;
         }
 
         .profile-info .role {
             font-size: 14px;
-            color: #666;
-            margin-bottom: 4px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
         }
 
         .handicap-badge {
             display: inline-block;
-            background: #e8f5e9;
-            color: #2e7d32;
-            padding: 4px 12px;
-            border-radius: 12px;
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            color: var(--primary-dark);
+            padding: 6px 14px;
+            border-radius: 16px;
             font-size: 13px;
-            font-weight: 600;
+            font-weight: 700;
+            box-shadow: 0 2px 6px rgba(46, 125, 50, 0.2);
         }
 
         .profile-details {
@@ -222,20 +404,23 @@
             flex-wrap: wrap;
             gap: 16px;
             margin-bottom: 12px;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 10px;
         }
 
         .detail-item {
             display: flex;
             align-items: center;
             gap: 6px;
-            font-size: 14px;
-            color: #666;
+            font-size: 13px;
+            color: var(--text-secondary);
         }
 
         .profile-bio {
             font-size: 14px;
-            color: #333;
-            line-height: 1.5;
+            color: var(--text-primary);
+            line-height: 1.6;
             margin-bottom: 12px;
         }
 
@@ -246,89 +431,283 @@
         }
 
         .tag {
-            background: #f5f5f5;
-            color: #666;
+            background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
+            color: var(--text-secondary);
             padding: 6px 12px;
             border-radius: 16px;
             font-size: 12px;
+            font-weight: 500;
         }
 
-        /* Detail View */
-        .profile-detail {
+        /* Stats Dashboard */
+        .stats-dashboard {
             padding: 24px;
         }
 
-        .detail-avatar {
-            width: 100px;
-            height: 100px;
+        .stats-header {
+            margin-bottom: 24px;
+        }
+
+        .stats-header h2 {
+            font-size: 24px;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .stats-period {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .stat-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 2px 12px var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .stat-card-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .stat-card-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .stat-card-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-card-change {
+            font-size: 12px;
+            margin-top: 8px;
+            padding: 4px 8px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        .stat-card-change.positive {
+            background: #e8f5e9;
+            color: var(--success);
+        }
+
+        .stat-card-change.negative {
+            background: #ffebee;
+            color: #f44336;
+        }
+
+        /* Groups */
+        .group-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin: 16px;
+            box-shadow: 0 2px 12px var(--shadow);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .group-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+
+        .group-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .group-icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+        }
+
+        .group-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .group-description {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .group-stats {
+            display: flex;
+            gap: 20px;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .group-badge {
+            background: var(--primary-light);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        /* Calendar / Upcoming Rounds */
+        .round-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin: 16px;
+            box-shadow: 0 2px 12px var(--shadow);
+            border-left: 4px solid var(--primary);
+        }
+
+        .round-date {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+
+        .round-course {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .round-players {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .player-avatar-small {
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #4caf50, #2e7d32);
+            background: linear-gradient(135deg, var(--primary-light), var(--primary-dark));
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 40px;
-            font-weight: 600;
-            margin: 0 auto 20px;
-        }
-
-        .detail-name {
-            text-align: center;
-            font-size: 24px;
-            font-weight: 600;
-            color: #1a1a1a;
-            margin-bottom: 8px;
-        }
-
-        .detail-role {
-            text-align: center;
-            font-size: 16px;
-            color: #666;
-            margin-bottom: 16px;
-        }
-
-        .detail-stats {
-            display: flex;
-            justify-content: space-around;
-            padding: 20px 0;
-            border-top: 1px solid #e0e0e0;
-            border-bottom: 1px solid #e0e0e0;
-            margin-bottom: 24px;
-        }
-
-        .stat {
-            text-align: center;
-        }
-
-        .stat-value {
-            font-size: 24px;
-            font-weight: 600;
-            color: #2e7d32;
-        }
-
-        .stat-label {
             font-size: 12px;
-            color: #666;
-            margin-top: 4px;
-        }
-
-        .section {
-            margin-bottom: 24px;
-        }
-
-        .section-title {
-            font-size: 14px;
             font-weight: 600;
-            color: #999;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+        }
+
+        /* Messages */
+        .message-list {
+            padding: 16px;
+        }
+
+        .message-item {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 8px var(--shadow);
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .message-item:hover {
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+        }
+
+        .message-content {
+            flex: 1;
+        }
+
+        .message-sender {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .message-preview {
+            font-size: 13px;
+            color: var(--text-secondary);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .message-time {
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+
+        .unread-badge {
+            background: var(--primary);
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        /* Notes */
+        .note-card {
+            background: #fffde7;
+            border-radius: 12px;
+            padding: 16px;
+            margin: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border-left: 4px solid #fbc02d;
+        }
+
+        .note-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 12px;
         }
 
-        .section-content {
-            font-size: 15px;
-            color: #333;
-            line-height: 1.6;
+        .note-person {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .note-date {
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+
+        .note-content {
+            font-size: 14px;
+            color: var(--text-primary);
+            line-height: 1.5;
         }
 
         /* Modal */
@@ -338,11 +717,12 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.6);
             display: none;
             align-items: center;
             justify-content: center;
             z-index: 1000;
+            backdrop-filter: blur(4px);
         }
 
         .modal-overlay.active {
@@ -352,17 +732,30 @@
         .modal {
             background: white;
             border-radius: 20px;
-            padding: 24px;
+            padding: 28px;
             max-width: 90%;
             width: 360px;
-            max-height: 80vh;
+            max-height: 85vh;
             overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: modalSlideUp 0.3s ease-out;
+        }
+
+        @keyframes modalSlideUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
         .modal h3 {
-            font-size: 20px;
-            margin-bottom: 16px;
-            color: #1a1a1a;
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: var(--text-primary);
         }
 
         /* Bottom Nav */
@@ -374,11 +767,12 @@
             max-width: 430px;
             margin: 0 auto;
             background: white;
-            border-top: 1px solid #e0e0e0;
+            border-top: 1px solid var(--border);
             display: flex;
             justify-content: space-around;
-            padding: 12px 0;
-            box-shadow: 0 -2px 8px rgba(0,0,0,0.05);
+            padding: 8px 0 12px;
+            box-shadow: 0 -2px 12px rgba(0,0,0,0.08);
+            z-index: 100;
         }
 
         .nav-item {
@@ -387,73 +781,266 @@
             align-items: center;
             gap: 4px;
             cursor: pointer;
-            padding: 4px 20px;
-            color: #999;
-            transition: color 0.3s;
+            padding: 6px 16px;
+            color: var(--text-secondary);
+            transition: all 0.3s;
+            border-radius: 12px;
+        }
+
+        .nav-item:hover {
+            background: #f8f9fa;
         }
 
         .nav-item.active {
-            color: #4caf50;
+            color: var(--primary);
         }
 
         .nav-icon {
             font-size: 24px;
+            transition: transform 0.3s;
+        }
+
+        .nav-item.active .nav-icon {
+            transform: scale(1.1);
         }
 
         .nav-label {
             font-size: 11px;
+            font-weight: 500;
         }
 
-        .hidden {
-            display: none;
+        /* Section Headers */
+        .section-header {
+            padding: 20px 24px 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .section-action {
+            color: var(--primary);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .section-action:hover {
+            color: var(--primary-dark);
         }
 
         /* Empty State */
         .empty-state {
             text-align: center;
-            padding: 60px 24px;
-            color: #999;
+            padding: 80px 24px;
+            color: var(--text-secondary);
         }
 
         .empty-state-icon {
-            font-size: 48px;
+            font-size: 64px;
             margin-bottom: 16px;
+            opacity: 0.5;
+        }
+
+        .empty-state-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .empty-state-text {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* Utility Classes */
+        .hidden {
+            display: none !important;
+        }
+
+        /* Tab Switcher */
+        .tab-switcher {
+            display: flex;
+            gap: 8px;
+            padding: 16px 24px 0;
+            border-bottom: 1px solid var(--border);
+            background: white;
+        }
+
+        .tab {
+            padding: 12px 20px;
+            border: none;
+            background: none;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
         }
 
         /* Success Message */
-        .success-message {
-            background: #e8f5e9;
-            color: #2e7d32;
-            padding: 16px;
+        .success-toast {
+            position: fixed;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--success);
+            color: white;
+            padding: 16px 24px;
             border-radius: 12px;
-            margin-bottom: 20px;
-            display: flex;
+            box-shadow: 0 4px 20px rgba(76, 175, 80, 0.4);
+            display: none;
             align-items: center;
             gap: 12px;
+            z-index: 2000;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        .success-toast.show {
+            display: flex;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateX(-50%) translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Filters */
+        .filter-chips {
+            display: flex;
+            gap: 8px;
+            padding: 16px 24px;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .filter-chip {
+            padding: 8px 16px;
+            border: 2px solid var(--border);
+            border-radius: 20px;
+            background: white;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-chip.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
         }
     </style>
 </head>
 <body>
     <div class="app-container">
-        <!-- Onboarding Screen -->
-        <div id="onboardingScreen" class="content">
-            <div class="onboarding">
-                <div class="logo">⛳</div>
-                <h2>FairwayConnect</h2>
-                <p>Where golf meets business. Build your professional network on the course.</p>
-                <button class="btn btn-primary" onclick="showProfileSetup()">Get Started</button>
+        <!-- Success Toast -->
+        <div id="successToast" class="success-toast">
+            <span style="font-size: 24px;">✓</span>
+            <span id="toastMessage">Success!</span>
+        </div>
+
+        <!-- Landing Screen -->
+        <div id="landingScreen" class="landing">
+            <div class="landing-hero">
+                <div class="hero-badge">🏆 Professional Golf Network</div>
+                <div class="landing-logo">⛳</div>
+                <h1>FairwayConnect</h1>
+                <p class="landing-tagline">Where Business Happens on the Course.<br>Build relationships that matter.</p>
+                <div class="cta-group">
+                    <button class="btn btn-primary" onclick="showProfileSetup()">
+                        Get Started →
+                    </button>
+                    <button class="btn btn-secondary" onclick="showDemo()">
+                        See How It Works
+                    </button>
+                </div>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🤝</div>
+                    <div class="feature-title">Network</div>
+                    <div class="feature-desc">Connect with professionals in your industry</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📅</div>
+                    <div class="feature-title">Schedule</div>
+                    <div class="feature-desc">Find partners for your next round</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <div class="feature-title">Track Progress</div>
+                    <div class="feature-desc">Monitor your game improvement</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💼</div>
+                    <div class="feature-title">Close Deals</div>
+                    <div class="feature-desc">Build business relationships</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <div class="feature-title">Join Groups</div>
+                    <div class="feature-desc">Industry-specific communities</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <div class="feature-title">Stay Connected</div>
+                    <div class="feature-desc">Direct messaging & notes</div>
+                </div>
+            </div>
+
+            <div class="social-proof">
+                <h2 style="margin-bottom: 8px;">Trusted by Professionals</h2>
+                <p style="color: rgba(255,255,255,0.6); font-size: 14px; margin-bottom: 24px;">
+                    Join thousands of business leaders connecting on the course
+                </p>
+                <div class="stats-row">
+                    <div class="stat">
+                        <div class="stat-number">2,500+</div>
+                        <div class="stat-label">Members</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">8,400+</div>
+                        <div class="stat-label">Rounds Played</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">$12M+</div>
+                        <div class="stat-label">Deals Closed</div>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- Profile Setup Screen -->
         <div id="profileSetupScreen" class="hidden">
             <div class="header">
-                <button class="header-back" onclick="showOnboarding()">←</button>
-                <h1>Create Profile</h1>
+                <button class="header-back" onclick="showLanding()">←</button>
+                <h1>Create Your Profile</h1>
                 <div style="width: 32px;"></div>
             </div>
             <div class="content">
-                <form id="profileForm" style="padding: 24px;">
+                <form id="profileForm" class="form-section">
                     <div class="form-group">
                         <label>Full Name *</label>
                         <input type="text" id="fullName" required placeholder="John Smith">
@@ -476,6 +1063,7 @@
                             <option value="Healthcare">Healthcare</option>
                             <option value="Consulting">Consulting</option>
                             <option value="Legal">Legal</option>
+                            <option value="Manufacturing">Manufacturing</option>
                             <option value="Other">Other</option>
                         </select>
                     </div>
@@ -496,10 +1084,12 @@
                         <input type="text" id="interests" placeholder="Venture Capital, Startups, Real Estate">
                     </div>
                     <div class="checkbox-group">
-                        <input type="checkbox" id="openToPlay">
-                        <label for="openToPlay" style="margin-bottom: 0;">Open to playing with new connections</label>
+                        <input type="checkbox" id="openToPlay" checked>
+                        <label for="openToPlay" style="margin-bottom: 0; font-weight: normal; text-transform: none; letter-spacing: 0;">Open to playing with new connections</label>
                     </div>
-                    <button type="submit" class="btn btn-primary" style="margin-top: 24px;">Complete Profile</button>
+                    <button type="submit" class="btn btn-primary" style="margin-top: 24px;">
+                        Complete Profile →
+                    </button>
                 </form>
             </div>
         </div>
@@ -507,7 +1097,15 @@
         <!-- Main Feed Screen -->
         <div id="feedScreen" class="hidden">
             <div class="header">
-                <h1>FairwayConnect</h1>
+                <h1>Discover</h1>
+                <button class="header-action" onclick="showFilters()">⚙️</button>
+            </div>
+            <div class="filter-chips">
+                <div class="filter-chip active">All</div>
+                <div class="filter-chip">Technology</div>
+                <div class="filter-chip">Finance</div>
+                <div class="filter-chip">Real Estate</div>
+                <div class="filter-chip">Open to Play</div>
             </div>
             <div class="content" id="feedContent">
                 <!-- Profile cards will be inserted here -->
@@ -517,7 +1115,168 @@
                     <div class="nav-icon">🏠</div>
                     <div class="nav-label">Discover</div>
                 </div>
-                <div class="nav-item" onclick="showMyProfile()">
+                <div class="nav-item" onclick="showGroups()">
+                    <div class="nav-icon">👥</div>
+                    <div class="nav-label">Groups</div>
+                </div>
+                <div class="nav-item" onclick="showRounds()">
+                    <div class="nav-icon">📅</div>
+                    <div class="nav-label">Rounds</div>
+                </div>
+                <div class="nav-item" onclick="showMessages()">
+                    <div class="nav-icon">💬</div>
+                    <div class="nav-label">Messages</div>
+                </div>
+                <div class="nav-item" onclick="showProfile()">
+                    <div class="nav-icon">👤</div>
+                    <div class="nav-label">Profile</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Groups Screen -->
+        <div id="groupsScreen" class="hidden">
+            <div class="header">
+                <h1>Golf Groups</h1>
+                <button class="header-action" onclick="openCreateGroup()">+</button>
+            </div>
+            <div class="content" id="groupsContent">
+                <!-- Groups will be inserted here -->
+            </div>
+            <div class="bottom-nav">
+                <div class="nav-item" onclick="showFeed()">
+                    <div class="nav-icon">🏠</div>
+                    <div class="nav-label">Discover</div>
+                </div>
+                <div class="nav-item active">
+                    <div class="nav-icon">👥</div>
+                    <div class="nav-label">Groups</div>
+                </div>
+                <div class="nav-item" onclick="showRounds()">
+                    <div class="nav-icon">📅</div>
+                    <div class="nav-label">Rounds</div>
+                </div>
+                <div class="nav-item" onclick="showMessages()">
+                    <div class="nav-icon">💬</div>
+                    <div class="nav-label">Messages</div>
+                </div>
+                <div class="nav-item" onclick="showProfile()">
+                    <div class="nav-icon">👤</div>
+                    <div class="nav-label">Profile</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Upcoming Rounds Screen -->
+        <div id="roundsScreen" class="hidden">
+            <div class="header">
+                <h1>Upcoming Rounds</h1>
+                <button class="header-action" onclick="openPostRound()">+</button>
+            </div>
+            <div class="content" id="roundsContent">
+                <!-- Rounds will be inserted here -->
+            </div>
+            <div class="bottom-nav">
+                <div class="nav-item" onclick="showFeed()">
+                    <div class="nav-icon">🏠</div>
+                    <div class="nav-label">Discover</div>
+                </div>
+                <div class="nav-item" onclick="showGroups()">
+                    <div class="nav-icon">👥</div>
+                    <div class="nav-label">Groups</div>
+                </div>
+                <div class="nav-item active">
+                    <div class="nav-icon">📅</div>
+                    <div class="nav-label">Rounds</div>
+                </div>
+                <div class="nav-item" onclick="showMessages()">
+                    <div class="nav-icon">💬</div>
+                    <div class="nav-label">Messages</div>
+                </div>
+                <div class="nav-item" onclick="showProfile()">
+                    <div class="nav-icon">👤</div>
+                    <div class="nav-label">Profile</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Messages Screen -->
+        <div id="messagesScreen" class="hidden">
+            <div class="header">
+                <h1>Messages</h1>
+            </div>
+            <div class="content" id="messagesContent">
+                <!-- Messages will be inserted here -->
+            </div>
+            <div class="bottom-nav">
+                <div class="nav-item" onclick="showFeed()">
+                    <div class="nav-icon">🏠</div>
+                    <div class="nav-label">Discover</div>
+                </div>
+                <div class="nav-item" onclick="showGroups()">
+                    <div class="nav-icon">👥</div>
+                    <div class="nav-label">Groups</div>
+                </div>
+                <div class="nav-item" onclick="showRounds()">
+                    <div class="nav-icon">📅</div>
+                    <div class="nav-label">Rounds</div>
+                </div>
+                <div class="nav-item active">
+                    <div class="nav-icon">💬</div>
+                    <div class="nav-label">Messages</div>
+                </div>
+                <div class="nav-item" onclick="showProfile()">
+                    <div class="nav-icon">👤</div>
+                    <div class="nav-label">Profile</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Screen -->
+        <div id="profileScreen" class="hidden">
+            <div class="header">
+                <button class="header-back" onclick="showFeed()">←</button>
+                <h1>My Profile</h1>
+                <button class="header-action" onclick="editProfile()">✏️</button>
+            </div>
+            <div class="content">
+                <div class="tab-switcher">
+                    <button class="tab active" onclick="showProfileTab('overview')">Overview</button>
+                    <button class="tab" onclick="showProfileTab('stats')">Stats</button>
+                    <button class="tab" onclick="showProfileTab('notes')">Notes</button>
+                </div>
+                <div id="profileOverview">
+                    <div id="profileContent" style="padding: 24px;"></div>
+                </div>
+                <div id="profileStats" class="hidden">
+                    <div class="stats-dashboard" id="statsContent"></div>
+                </div>
+                <div id="profileNotes" class="hidden">
+                    <div class="section-header">
+                        <div class="section-title">Connection Notes</div>
+                        <div class="section-action" onclick="addNote()">+ Add Note</div>
+                    </div>
+                    <div id="notesContent"></div>
+                </div>
+            </div>
+            <div class="bottom-nav">
+                <div class="nav-item" onclick="showFeed()">
+                    <div class="nav-icon">🏠</div>
+                    <div class="nav-label">Discover</div>
+                </div>
+                <div class="nav-item" onclick="showGroups()">
+                    <div class="nav-icon">👥</div>
+                    <div class="nav-label">Groups</div>
+                </div>
+                <div class="nav-item" onclick="showRounds()">
+                    <div class="nav-icon">📅</div>
+                    <div class="nav-label">Rounds</div>
+                </div>
+                <div class="nav-item" onclick="showMessages()">
+                    <div class="nav-icon">💬</div>
+                    <div class="nav-label">Messages</div>
+                </div>
+                <div class="nav-item active">
                     <div class="nav-icon">👤</div>
                     <div class="nav-label">Profile</div>
                 </div>
@@ -529,36 +1288,10 @@
             <div class="header">
                 <button class="header-back" onclick="showFeed()">←</button>
                 <h1>Profile</h1>
-                <div style="width: 32px;"></div>
+                <button class="header-action" onclick="addNoteForProfile()">📝</button>
             </div>
             <div class="content">
-                <div class="profile-detail" id="detailContent">
-                    <!-- Detail content will be inserted here -->
-                </div>
-            </div>
-        </div>
-
-        <!-- My Profile Screen -->
-        <div id="myProfileScreen" class="hidden">
-            <div class="header">
-                <button class="header-back" onclick="showFeed()">←</button>
-                <h1>My Profile</h1>
-                <div style="width: 32px;"></div>
-            </div>
-            <div class="content">
-                <div class="profile-detail" id="myProfileContent">
-                    <!-- My profile content will be inserted here -->
-                </div>
-            </div>
-            <div class="bottom-nav">
-                <div class="nav-item" onclick="showFeed()">
-                    <div class="nav-icon">🏠</div>
-                    <div class="nav-label">Discover</div>
-                </div>
-                <div class="nav-item active">
-                    <div class="nav-icon">👤</div>
-                    <div class="nav-label">Profile</div>
-                </div>
+                <div id="detailContent" style="padding: 24px;"></div>
             </div>
         </div>
 
@@ -580,7 +1313,61 @@
                     <textarea id="requestMessage" placeholder="Looking forward to connecting on the course..."></textarea>
                 </div>
                 <button class="btn btn-primary" onclick="sendRequest()">Send Request</button>
-                <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+                <button class="btn btn-outline" onclick="closeModal()" style="margin-top: 12px;">Cancel</button>
+            </div>
+        </div>
+
+        <!-- Add Note Modal -->
+        <div id="noteModal" class="modal-overlay">
+            <div class="modal">
+                <h3>Add Connection Note</h3>
+                <div class="form-group">
+                    <label>Person</label>
+                    <input type="text" id="notePerson" placeholder="Who did you play with?">
+                </div>
+                <div class="form-group">
+                    <label>Date</label>
+                    <input type="date" id="noteDate">
+                </div>
+                <div class="form-group">
+                    <label>Notes</label>
+                    <textarea id="noteContent" placeholder="What did you discuss? Any follow-ups needed?"></textarea>
+                </div>
+                <button class="btn btn-primary" onclick="saveNote()">Save Note</button>
+                <button class="btn btn-outline" onclick="closeNoteModal()" style="margin-top: 12px;">Cancel</button>
+            </div>
+        </div>
+
+        <!-- Post Round Modal -->
+        <div id="postRoundModal" class="modal-overlay">
+            <div class="modal">
+                <h3>Post a Round</h3>
+                <div class="form-group">
+                    <label>Course</label>
+                    <input type="text" id="roundCourse" placeholder="Where are you playing?">
+                </div>
+                <div class="form-group">
+                    <label>Date</label>
+                    <input type="date" id="roundDate">
+                </div>
+                <div class="form-group">
+                    <label>Time</label>
+                    <input type="time" id="roundTime">
+                </div>
+                <div class="form-group">
+                    <label>Spots Available</label>
+                    <select id="roundSpots">
+                        <option value="1">1 spot</option>
+                        <option value="2">2 spots</option>
+                        <option value="3">3 spots</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Notes (Optional)</label>
+                    <textarea id="roundNotes" placeholder="Any details about the round..."></textarea>
+                </div>
+                <button class="btn btn-primary" onclick="postRound()">Post Round</button>
+                <button class="btn btn-outline" onclick="closePostRoundModal()" style="margin-top: 12px;">Cancel</button>
             </div>
         </div>
     </div>
@@ -599,7 +1386,8 @@
                 bio: "Serial entrepreneur passionate about startups and golf. Always looking to connect with founders and investors.",
                 interests: ["Venture Capital", "AI/ML", "Startups"],
                 openToPlay: true,
-                rounds: 142
+                rounds: 142,
+                connections: 87
             },
             {
                 id: 2,
@@ -612,7 +1400,8 @@
                 bio: "Private equity investor focused on growth companies. Love talking deals between holes.",
                 interests: ["Private Equity", "M&A", "SaaS"],
                 openToPlay: true,
-                rounds: 98
+                rounds: 98,
+                connections: 64
             },
             {
                 id: 3,
@@ -625,7 +1414,8 @@
                 bio: "Enterprise sales leader. Golf is where I build the best client relationships.",
                 interests: ["Enterprise Software", "Sales Strategy"],
                 openToPlay: true,
-                rounds: 76
+                rounds: 76,
+                connections: 52
             },
             {
                 id: 4,
@@ -638,16 +1428,147 @@
                 bio: "Real estate tech founder. Looking to network with other entrepreneurs and investors.",
                 interests: ["Real Estate", "PropTech", "Angel Investing"],
                 openToPlay: true,
-                rounds: 54
+                rounds: 54,
+                connections: 41
+            },
+            {
+                id: 5,
+                name: "Amanda Williams",
+                title: "Managing Director",
+                company: "Harbor Healthcare",
+                industry: "Healthcare",
+                handicap: 10,
+                homeCourse: "Kiawah Island",
+                bio: "Healthcare executive focused on innovation. Golf helps me think strategically.",
+                interests: ["Healthcare Innovation", "Digital Health"],
+                openToPlay: true,
+                rounds: 89,
+                connections: 58
+            }
+        ];
+
+        const sampleGroups = [
+            {
+                id: 1,
+                name: "Tech Founders Golf Network",
+                description: "Connect with fellow technology entrepreneurs and discuss the future of innovation.",
+                members: 347,
+                icon: "💻",
+                activeRounds: 12
+            },
+            {
+                id: 2,
+                name: "Bay Area Real Estate Golf",
+                description: "Real estate professionals connecting on courses around the Bay Area.",
+                members: 189,
+                icon: "🏠",
+                activeRounds: 8
+            },
+            {
+                id: 3,
+                name: "Private Equity Golf Club",
+                description: "PE professionals sharing deals and insights on the fairway.",
+                members: 234,
+                icon: "💰",
+                activeRounds: 15
+            },
+            {
+                id: 4,
+                name: "Healthcare Leaders Golf",
+                description: "Healthcare executives discussing industry trends between holes.",
+                members: 156,
+                icon: "⚕️",
+                activeRounds: 6
+            }
+        ];
+
+        const sampleRounds = [
+            {
+                id: 1,
+                course: "Pebble Beach Golf Links",
+                date: "2026-02-18",
+                time: "9:00 AM",
+                organizer: "Michael Rodriguez",
+                spots: 1,
+                players: ["Michael Rodriguez", "Sarah Chen", "You"]
+            },
+            {
+                id: 2,
+                course: "Torrey Pines South",
+                date: "2026-02-20",
+                time: "2:00 PM",
+                organizer: "Sarah Chen",
+                spots: 2,
+                players: ["Sarah Chen", "Amanda Williams"]
+            },
+            {
+                id: 3,
+                course: "Spyglass Hill",
+                date: "2026-02-22",
+                time: "11:30 AM",
+                organizer: "Jennifer Park",
+                spots: 1,
+                players: ["Jennifer Park", "David Thompson", "You"]
+            }
+        ];
+
+        const sampleMessages = [
+            {
+                id: 1,
+                sender: "Sarah Chen",
+                preview: "Great round yesterday! Let's discuss that partnership opportunity...",
+                time: "2h ago",
+                unread: 2
+            },
+            {
+                id: 2,
+                sender: "Michael Rodriguez",
+                preview: "I'd love to connect you with our portfolio company CEO",
+                time: "5h ago",
+                unread: 0
+            },
+            {
+                id: 3,
+                sender: "Tech Founders Network",
+                preview: "Join us for our monthly tournament at Pebble Beach",
+                time: "1d ago",
+                unread: 1
             }
         ];
 
         let currentUser = null;
         let selectedProfile = null;
+        let userNotes = [];
+        let currentProfileTab = 'overview';
 
-        function showOnboarding() {
+        // Screen Navigation
+        function hideAll() {
+            const screens = ['landingScreen', 'profileSetupScreen', 'feedScreen', 'groupsScreen', 'roundsScreen', 'messagesScreen', 'profileScreen', 'detailScreen'];
+            screens.forEach(screen => {
+                document.getElementById(screen).classList.add('hidden');
+            });
+        }
+
+        function showLanding() {
             hideAll();
-            document.getElementById('onboardingScreen').classList.remove('hidden');
+            document.getElementById('landingScreen').classList.remove('hidden');
+        }
+
+        function showDemo() {
+            // Create a demo user and go straight to feed
+            currentUser = {
+                name: "Demo User",
+                title: "Product Manager",
+                company: "Demo Company",
+                industry: "Technology",
+                handicap: 15,
+                homeCourse: "Demo Golf Club",
+                bio: "This is a demo account to explore FairwayConnect",
+                interests: ["Golf", "Networking"],
+                openToPlay: true
+            };
+            showToast("Exploring demo mode!");
+            showFeed();
         }
 
         function showProfileSetup() {
@@ -661,10 +1582,28 @@
             renderFeed();
         }
 
-        function showMyProfile() {
+        function showGroups() {
             hideAll();
-            document.getElementById('myProfileScreen').classList.remove('hidden');
-            renderMyProfile();
+            document.getElementById('groupsScreen').classList.remove('hidden');
+            renderGroups();
+        }
+
+        function showRounds() {
+            hideAll();
+            document.getElementById('roundsScreen').classList.remove('hidden');
+            renderRounds();
+        }
+
+        function showMessages() {
+            hideAll();
+            document.getElementById('messagesScreen').classList.remove('hidden');
+            renderMessages();
+        }
+
+        function showProfile() {
+            hideAll();
+            document.getElementById('profileScreen').classList.remove('hidden');
+            showProfileTab(currentProfileTab);
         }
 
         function showDetail(profile) {
@@ -674,17 +1613,50 @@
             renderDetail(profile);
         }
 
-        function hideAll() {
-            const screens = ['onboardingScreen', 'profileSetupScreen', 'feedScreen', 'detailScreen', 'myProfileScreen'];
-            screens.forEach(screen => {
-                document.getElementById(screen).classList.add('hidden');
-            });
+        function showProfileTab(tab) {
+            currentProfileTab = tab;
+            // Update tab buttons
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Show correct content
+            document.getElementById('profileOverview').classList.add('hidden');
+            document.getElementById('profileStats').classList.add('hidden');
+            document.getElementById('profileNotes').classList.add('hidden');
+            
+            if (tab === 'overview') {
+                document.getElementById('profileOverview').classList.remove('hidden');
+                renderMyProfile();
+            } else if (tab === 'stats') {
+                document.getElementById('profileStats').classList.remove('hidden');
+                renderStats();
+            } else if (tab === 'notes') {
+                document.getElementById('profileNotes').classList.remove('hidden');
+                renderNotes();
+            }
         }
 
+        // Utilities
         function getInitials(name) {
             return name.split(' ').map(n => n[0]).join('');
         }
 
+        function showToast(message) {
+            const toast = document.getElementById('successToast');
+            document.getElementById('toastMessage').textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        function formatDate(dateStr) {
+            const date = new Date(dateStr);
+            const options = { weekday: 'short', month: 'short', day: 'numeric' };
+            return date.toLocaleDateString('en-US', options);
+        }
+
+        // Rendering Functions
         function renderFeed() {
             const feedContent = document.getElementById('feedContent');
             
@@ -692,20 +1664,21 @@
                 feedContent.innerHTML = `
                     <div class="empty-state">
                         <div class="empty-state-icon">⛳</div>
-                        <p>Complete your profile to start discovering golfers in your network</p>
+                        <div class="empty-state-title">Welcome to FairwayConnect</div>
+                        <div class="empty-state-text">Complete your profile to start discovering golfers in your network</div>
                     </div>
                 `;
                 return;
             }
 
             feedContent.innerHTML = sampleProfiles.map(profile => `
-                <div class="profile-card" onclick='showDetail(${JSON.stringify(profile)})'>
+                <div class="profile-card" onclick='showDetail(${JSON.stringify(profile).replace(/'/g, "&apos;")})'>
                     <div class="profile-header">
                         <div class="avatar">${getInitials(profile.name)}</div>
                         <div class="profile-info">
                             <h3>${profile.name}</h3>
                             <div class="role">${profile.title} at ${profile.company}</div>
-                            <span class="handicap-badge">Handicap ${profile.handicap}</span>
+                            <span class="handicap-badge">HCP ${profile.handicap}</span>
                         </div>
                     </div>
                     <div class="profile-details">
@@ -717,6 +1690,10 @@
                             <span>💼</span>
                             <span>${profile.industry}</span>
                         </div>
+                        <div class="detail-item">
+                            <span>🤝</span>
+                            <span>${profile.connections} connections</span>
+                        </div>
                     </div>
                     <div class="profile-bio">${profile.bio}</div>
                     <div class="profile-tags">
@@ -726,115 +1703,265 @@
             `).join('');
         }
 
-        function renderDetail(profile) {
-            document.getElementById('detailContent').innerHTML = `
-                <div class="detail-avatar">${getInitials(profile.name)}</div>
-                <div class="detail-name">${profile.name}</div>
-                <div class="detail-role">${profile.title} at ${profile.company}</div>
-                
-                <div class="detail-stats">
-                    <div class="stat">
-                        <div class="stat-value">${profile.handicap}</div>
-                        <div class="stat-label">Handicap</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">${profile.rounds}</div>
-                        <div class="stat-label">Rounds</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">2.5</div>
-                        <div class="stat-label">Avg Score</div>
-                    </div>
+        function renderGroups() {
+            const groupsContent = document.getElementById('groupsContent');
+            
+            groupsContent.innerHTML = `
+                <div class="section-header">
+                    <div class="section-title">Your Groups</div>
                 </div>
-
-                <div class="section">
-                    <div class="section-title">About</div>
-                    <div class="section-content">${profile.bio}</div>
-                </div>
-
-                <div class="section">
-                    <div class="section-title">Home Course</div>
-                    <div class="section-content">🏌️ ${profile.homeCourse}</div>
-                </div>
-
-                <div class="section">
-                    <div class="section-title">Industry & Interests</div>
-                    <div class="section-content">
-                        <div class="profile-tags">
-                            <span class="tag">${profile.industry}</span>
-                            ${profile.interests.map(interest => `<span class="tag">${interest}</span>`).join('')}
+                ${sampleGroups.map(group => `
+                    <div class="group-card">
+                        <div class="group-icon">${group.icon}</div>
+                        <div class="group-header">
+                            <div>
+                                <div class="group-name">${group.name}</div>
+                            </div>
+                            <div class="group-badge">Member</div>
+                        </div>
+                        <div class="group-description">${group.description}</div>
+                        <div class="group-stats">
+                            <span>👥 ${group.members} members</span>
+                            <span>📅 ${group.activeRounds} active rounds</span>
                         </div>
                     </div>
-                </div>
+                `).join('')}
+            `;
+        }
 
-                <button class="btn btn-primary" onclick="openRequestModal()">Request a Round</button>
+        function renderRounds() {
+            const roundsContent = document.getElementById('roundsContent');
+            
+            roundsContent.innerHTML = `
+                <div class="section-header">
+                    <div class="section-title">This Week</div>
+                </div>
+                ${sampleRounds.map(round => `
+                    <div class="round-card">
+                        <div class="round-date">
+                            <span>📅</span>
+                            <span>${formatDate(round.date)} at ${round.time}</span>
+                        </div>
+                        <div class="round-course">${round.course}</div>
+                        <div style="font-size: 13px; color: var(--text-secondary); margin-top: 8px;">
+                            ${round.spots} spot${round.spots > 1 ? 's' : ''} available
+                        </div>
+                        <div class="round-players">
+                            ${round.players.map(player => `
+                                <div class="player-avatar-small">${player === 'You' ? '👤' : getInitials(player)}</div>
+                            `).join('')}
+                            ${round.spots > 0 ? '<div class="player-avatar-small" style="background: #e0e0e0; color: #999;">+</div>' : ''}
+                        </div>
+                    </div>
+                `).join('')}
+            `;
+        }
+
+        function renderMessages() {
+            const messagesContent = document.getElementById('messagesContent');
+            
+            messagesContent.innerHTML = `
+                <div class="message-list">
+                    ${sampleMessages.map(msg => `
+                        <div class="message-item">
+                            <div class="avatar" style="width: 48px; height: 48px; font-size: 18px;">${getInitials(msg.sender)}</div>
+                            <div class="message-content">
+                                <div class="message-sender">${msg.sender}</div>
+                                <div class="message-preview">${msg.preview}</div>
+                            </div>
+                            <div style="text-align: right;">
+                                ${msg.unread > 0 ? `<div class="unread-badge">${msg.unread}</div>` : ''}
+                                <div class="message-time">${msg.time}</div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
             `;
         }
 
         function renderMyProfile() {
             if (!currentUser) return;
             
-            document.getElementById('myProfileContent').innerHTML = `
-                <div class="detail-avatar">${getInitials(currentUser.name)}</div>
-                <div class="detail-name">${currentUser.name}</div>
-                <div class="detail-role">${currentUser.title}${currentUser.company ? ' at ' + currentUser.company : ''}</div>
+            document.getElementById('profileContent').innerHTML = `
+                <div style="text-align: center; margin-bottom: 24px;">
+                    <div class="avatar" style="width: 100px; height: 100px; font-size: 40px; margin: 0 auto 16px;">${getInitials(currentUser.name)}</div>
+                    <h2 style="font-size: 24px; margin-bottom: 4px;">${currentUser.name}</h2>
+                    <div style="color: var(--text-secondary); margin-bottom: 12px;">${currentUser.title}${currentUser.company ? ' at ' + currentUser.company : ''}</div>
+                    <span class="handicap-badge" style="font-size: 16px; padding: 8px 20px;">HCP ${currentUser.handicap}</span>
+                </div>
                 
-                <div class="detail-stats">
+                <div style="display: flex; justify-content: space-around; padding: 20px; background: #f8f9fa; border-radius: 16px; margin-bottom: 24px;">
                     <div class="stat">
-                        <div class="stat-value">${currentUser.handicap}</div>
+                        <div class="stat-value" style="font-size: 28px;">${currentUser.handicap}</div>
                         <div class="stat-label">Handicap</div>
                     </div>
                     <div class="stat">
-                        <div class="stat-value">0</div>
+                        <div class="stat-value" style="font-size: 28px;">0</div>
                         <div class="stat-label">Connections</div>
                     </div>
                     <div class="stat">
-                        <div class="stat-value">0</div>
+                        <div class="stat-value" style="font-size: 28px;">0</div>
                         <div class="stat-label">Rounds</div>
                     </div>
                 </div>
 
-                <div class="section">
-                    <div class="section-title">About</div>
-                    <div class="section-content">${currentUser.bio || 'No bio yet'}</div>
+                <div style="margin-bottom: 20px;">
+                    <div style="font-size: 13px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">About</div>
+                    <div style="color: var(--text-primary); line-height: 1.6;">${currentUser.bio || 'No bio yet'}</div>
                 </div>
 
                 ${currentUser.homeCourse ? `
-                <div class="section">
-                    <div class="section-title">Home Course</div>
-                    <div class="section-content">🏌️ ${currentUser.homeCourse}</div>
+                <div style="margin-bottom: 20px;">
+                    <div style="font-size: 13px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Home Course</div>
+                    <div style="color: var(--text-primary);">🏌️ ${currentUser.homeCourse}</div>
                 </div>
                 ` : ''}
 
-                <div class="section">
-                    <div class="section-title">Industry & Interests</div>
-                    <div class="section-content">
-                        <div class="profile-tags">
-                            <span class="tag">${currentUser.industry}</span>
-                            ${currentUser.interests ? currentUser.interests.map(interest => `<span class="tag">${interest}</span>`).join('') : ''}
-                        </div>
+                <div style="margin-bottom: 20px;">
+                    <div style="font-size: 13px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Industry & Interests</div>
+                    <div class="profile-tags">
+                        <span class="tag">${currentUser.industry}</span>
+                        ${currentUser.interests ? currentUser.interests.map(interest => `<span class="tag">${interest}</span>`).join('') : ''}
                     </div>
                 </div>
 
-                <div class="section">
-                    <div class="section-title">Availability</div>
-                    <div class="section-content">
+                <div style="margin-bottom: 20px;">
+                    <div style="font-size: 13px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Availability</div>
+                    <div style="color: var(--text-primary);">
                         ${currentUser.openToPlay ? '✅ Open to playing with new connections' : '⏸️ Not currently looking for new rounds'}
                     </div>
                 </div>
             `;
         }
 
+        function renderStats() {
+            document.getElementById('statsContent').innerHTML = `
+                <div class="stats-header">
+                    <h2>Your Golf Stats</h2>
+                    <div class="stats-period">Last 30 Days</div>
+                </div>
+
+                <div class="stat-cards">
+                    <div class="stat-card">
+                        <div class="stat-card-icon">⛳</div>
+                        <div class="stat-card-value">${currentUser.handicap}</div>
+                        <div class="stat-card-label">Handicap</div>
+                        <div class="stat-card-change positive">↓ 2 points</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-card-icon">🏌️</div>
+                        <div class="stat-card-value">8</div>
+                        <div class="stat-card-label">Rounds Played</div>
+                        <div class="stat-card-change positive">↑ 3 rounds</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-card-icon">🎯</div>
+                        <div class="stat-card-value">78.5</div>
+                        <div class="stat-card-label">Avg Score</div>
+                        <div class="stat-card-change positive">↓ 1.2 strokes</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-card-icon">🤝</div>
+                        <div class="stat-card-value">12</div>
+                        <div class="stat-card-label">New Connections</div>
+                        <div class="stat-card-change positive">↑ 5 people</div>
+                    </div>
+                </div>
+
+                <div style="background: white; border-radius: 16px; padding: 20px; box-shadow: 0 2px 12px var(--shadow);">
+                    <div style="font-size: 16px; font-weight: 600; margin-bottom: 16px;">Recent Improvement</div>
+                    <div style="color: var(--text-secondary); font-size: 14px; line-height: 1.6;">
+                        Your handicap has improved by 2 points this month! Keep up the great work. You're playing more consistently and making better connections on the course.
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderNotes() {
+            const notesContent = document.getElementById('notesContent');
+            
+            if (userNotes.length === 0) {
+                notesContent.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📝</div>
+                        <div class="empty-state-title">No notes yet</div>
+                        <div class="empty-state-text">Add notes about people you play with to remember important details</div>
+                    </div>
+                `;
+                return;
+            }
+
+            notesContent.innerHTML = userNotes.map(note => `
+                <div class="note-card">
+                    <div class="note-header">
+                        <div class="note-person">${note.person}</div>
+                        <div class="note-date">${note.date}</div>
+                    </div>
+                    <div class="note-content">${note.content}</div>
+                </div>
+            `).join('');
+        }
+
+        function renderDetail(profile) {
+            document.getElementById('detailContent').innerHTML = `
+                <div style="text-align: center; margin-bottom: 24px;">
+                    <div class="avatar" style="width: 100px; height: 100px; font-size: 40px; margin: 0 auto 16px;">${getInitials(profile.name)}</div>
+                    <h2 style="font-size: 24px; margin-bottom: 4px;">${profile.name}</h2>
+                    <div style="color: var(--text-secondary); margin-bottom: 12px;">${profile.title} at ${profile.company}</div>
+                    <span class="handicap-badge" style="font-size: 16px; padding: 8px 20px;">HCP ${profile.handicap}</span>
+                </div>
+                
+                <div style="display: flex; justify-content: space-around; padding: 20px; background: #f8f9fa; border-radius: 16px; margin-bottom: 24px;">
+                    <div class="stat">
+                        <div class="stat-value" style="font-size: 28px;">${profile.handicap}</div>
+                        <div class="stat-label">Handicap</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value" style="font-size: 28px;">${profile.rounds}</div>
+                        <div class="stat-label">Rounds</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value" style="font-size: 28px;">${profile.connections}</div>
+                        <div class="stat-label">Connections</div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <div style="font-size: 13px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">About</div>
+                    <div style="color: var(--text-primary); line-height: 1.6;">${profile.bio}</div>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <div style="font-size: 13px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Home Course</div>
+                    <div style="color: var(--text-primary);">🏌️ ${profile.homeCourse}</div>
+                </div>
+
+                <div style="margin-bottom: 24px;">
+                    <div style="font-size: 13px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Industry & Interests</div>
+                    <div class="profile-tags">
+                        <span class="tag">${profile.industry}</span>
+                        ${profile.interests.map(interest => `<span class="tag">${interest}</span>`).join('')}
+                    </div>
+                </div>
+
+                <button class="btn btn-primary" onclick="openRequestModal()">Request a Round</button>
+                <button class="btn btn-outline" onclick="sendMessage()" style="margin-top: 12px;">Send Message</button>
+            `;
+        }
+
+        // Modal Functions
         function openRequestModal() {
             if (!selectedProfile) return;
             
             document.getElementById('requestRecipient').innerHTML = `
-                <div style="margin-bottom: 16px; padding: 12px; background: #f5f5f5; border-radius: 8px;">
+                <div style="margin-bottom: 16px; padding: 12px; background: #f8f9fa; border-radius: 10px;">
                     <strong>To:</strong> ${selectedProfile.name}
                 </div>
             `;
             
-            // Set default date to tomorrow
             const tomorrow = new Date();
             tomorrow.setDate(tomorrow.getDate() + 1);
             document.getElementById('requestDate').value = tomorrow.toISOString().split('T')[0];
@@ -847,38 +1974,110 @@
         }
 
         function sendRequest() {
-            // In a real app, this would send to a backend
-            alert(`Round request sent to ${selectedProfile.name}! They'll receive a notification.`);
+            showToast(`Round request sent to ${selectedProfile.name}!`);
             closeModal();
             showFeed();
         }
 
-        // Handle profile form submission
-        document.getElementById('profileForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const interests = document.getElementById('interests').value
-                .split(',')
-                .map(i => i.trim())
-                .filter(i => i);
-            
-            currentUser = {
-                name: document.getElementById('fullName').value,
-                title: document.getElementById('title').value,
-                company: document.getElementById('company').value,
-                industry: document.getElementById('industry').value,
-                handicap: parseInt(document.getElementById('handicap').value),
-                homeCourse: document.getElementById('homeCourse').value,
-                bio: document.getElementById('bio').value,
-                interests: interests,
-                openToPlay: document.getElementById('openToPlay').checked
+        function sendMessage() {
+            showToast(`Message sent to ${selectedProfile.name}!`);
+        }
+
+        function openPostRound() {
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            document.getElementById('roundDate').value = tomorrow.toISOString().split('T')[0];
+            document.getElementById('postRoundModal').classList.add('active');
+        }
+
+        function closePostRoundModal() {
+            document.getElementById('postRoundModal').classList.remove('active');
+        }
+
+        function postRound() {
+            showToast('Round posted successfully!');
+            closePostRoundModal();
+        }
+
+        function addNote() {
+            const today = new Date();
+            document.getElementById('noteDate').value = today.toISOString().split('T')[0];
+            document.getElementById('noteModal').classList.add('active');
+        }
+
+        function addNoteForProfile() {
+            if (!selectedProfile) return;
+            document.getElementById('notePerson').value = selectedProfile.name;
+            const today = new Date();
+            document.getElementById('noteDate').value = today.toISOString().split('T')[0];
+            document.getElementById('noteModal').classList.add('active');
+        }
+
+        function closeNoteModal() {
+            document.getElementById('noteModal').classList.remove('active');
+        }
+
+        function saveNote() {
+            const note = {
+                person: document.getElementById('notePerson').value,
+                date: document.getElementById('noteDate').value,
+                content: document.getElementById('noteContent').value
             };
-            
-            showFeed();
-        });
+            userNotes.push(note);
+            showToast('Note saved!');
+            closeNoteModal();
+            if (currentProfileTab === 'notes') {
+                renderNotes();
+            }
+        }
+
+        function editProfile() {
+            showToast('Profile editing coming soon!');
+        }
+
+        function showFilters() {
+            showToast('Filters coming soon!');
+        }
+
+        function openCreateGroup() {
+            showToast('Group creation coming soon!');
+        }
+
+        // Form Handling
+        function setupFormHandler() {
+            const form = document.getElementById('profileForm');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const interests = document.getElementById('interests').value
+                        .split(',')
+                        .map(i => i.trim())
+                        .filter(i => i);
+                    
+                    currentUser = {
+                        name: document.getElementById('fullName').value,
+                        title: document.getElementById('title').value,
+                        company: document.getElementById('company').value,
+                        industry: document.getElementById('industry').value,
+                        handicap: parseInt(document.getElementById('handicap').value),
+                        homeCourse: document.getElementById('homeCourse').value,
+                        bio: document.getElementById('bio').value,
+                        interests: interests,
+                        openToPlay: document.getElementById('openToPlay').checked
+                    };
+                    
+                    showToast('Profile created successfully!');
+                    showFeed();
+                });
+            }
+        }
 
         // Initialize
-        showOnboarding();
+        window.addEventListener('DOMContentLoaded', function() {
+            showLanding();
+            setupFormHandler();
+        });
     </script>
 </body>
 </html>
