@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FairwayConnect - Golf Business Network</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f5f5f5;
+            max-width: 430px;
+            margin: 0 auto;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .app-container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: white;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #2e7d32 0%, #4caf50 100%);
+            color: white;
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .header-back {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        /* Content Area */
+        .content {
+            flex: 1;
+            overflow-y: auto;
+            padding-bottom: 70px;
+        }
+
+        /* Onboarding Screen */
+        .onboarding {
+            padding: 32px 24px;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 60px;
+            margin-bottom: 16px;
+        }
+
+        .onboarding h2 {
+            font-size: 28px;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+        }
+
+        .onboarding p {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 32px;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 24px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #4caf50;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .checkbox-group input {
+            width: auto;
+        }
+
+        /* Buttons */
+        .btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #2e7d32 0%, #4caf50 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+        }
+
+        .btn-secondary {
+            background: #f5f5f5;
+            color: #333;
+            margin-top: 12px;
+        }
+
+        /* Profile Card */
+        .profile-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .profile-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+        }
+
+        .profile-header {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4caf50, #2e7d32);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .profile-info h3 {
+            font-size: 18px;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+        }
+
+        .profile-info .role {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 4px;
+        }
+
+        .handicap-badge {
+            display: inline-block;
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .profile-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .profile-bio {
+            font-size: 14px;
+            color: #333;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .profile-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            background: #f5f5f5;
+            color: #666;
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+        }
+
+        /* Detail View */
+        .profile-detail {
+            padding: 24px;
+        }
+
+        .detail-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4caf50, #2e7d32);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 40px;
+            font-weight: 600;
+            margin: 0 auto 20px;
+        }
+
+        .detail-name {
+            text-align: center;
+            font-size: 24px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .detail-role {
+            text-align: center;
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 16px;
+        }
+
+        .detail-stats {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px 0;
+            border-top: 1px solid #e0e0e0;
+            border-bottom: 1px solid #e0e0e0;
+            margin-bottom: 24px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 600;
+            color: #2e7d32;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        .section {
+            margin-bottom: 24px;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        .section-content {
+            font-size: 15px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: white;
+            border-radius: 20px;
+            padding: 24px;
+            max-width: 90%;
+            width: 360px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal h3 {
+            font-size: 20px;
+            margin-bottom: 16px;
+            color: #1a1a1a;
+        }
+
+        /* Bottom Nav */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            max-width: 430px;
+            margin: 0 auto;
+            background: white;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.05);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            padding: 4px 20px;
+            color: #999;
+            transition: color 0.3s;
+        }
+
+        .nav-item.active {
+            color: #4caf50;
+        }
+
+        .nav-icon {
+            font-size: 24px;
+        }
+
+        .nav-label {
+            font-size: 11px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 24px;
+            color: #999;
+        }
+
+        .empty-state-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        /* Success Message */
+        .success-message {
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Onboarding Screen -->
+        <div id="onboardingScreen" class="content">
+            <div class="onboarding">
+                <div class="logo">⛳</div>
+                <h2>FairwayConnect</h2>
+                <p>Where golf meets business. Build your professional network on the course.</p>
+                <button class="btn btn-primary" onclick="showProfileSetup()">Get Started</button>
+            </div>
+        </div>
+
+        <!-- Profile Setup Screen -->
+        <div id="profileSetupScreen" class="hidden">
+            <div class="header">
+                <button class="header-back" onclick="showOnboarding()">←</button>
+                <h1>Create Profile</h1>
+                <div style="width: 32px;"></div>
+            </div>
+            <div class="content">
+                <form id="profileForm" style="padding: 24px;">
+                    <div class="form-group">
+                        <label>Full Name *</label>
+                        <input type="text" id="fullName" required placeholder="John Smith">
+                    </div>
+                    <div class="form-group">
+                        <label>Professional Title *</label>
+                        <input type="text" id="title" required placeholder="VP of Sales">
+                    </div>
+                    <div class="form-group">
+                        <label>Company</label>
+                        <input type="text" id="company" placeholder="Tech Innovations Inc.">
+                    </div>
+                    <div class="form-group">
+                        <label>Industry *</label>
+                        <select id="industry" required>
+                            <option value="">Select Industry</option>
+                            <option value="Technology">Technology</option>
+                            <option value="Finance">Finance</option>
+                            <option value="Real Estate">Real Estate</option>
+                            <option value="Healthcare">Healthcare</option>
+                            <option value="Consulting">Consulting</option>
+                            <option value="Legal">Legal</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Handicap *</label>
+                        <input type="number" id="handicap" required placeholder="12" min="0" max="54">
+                    </div>
+                    <div class="form-group">
+                        <label>Home Course</label>
+                        <input type="text" id="homeCourse" placeholder="Pebble Beach Golf Links">
+                    </div>
+                    <div class="form-group">
+                        <label>Bio</label>
+                        <textarea id="bio" placeholder="Tell others about your golf game and what you're looking to connect about..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Interests/Topics (comma separated)</label>
+                        <input type="text" id="interests" placeholder="Venture Capital, Startups, Real Estate">
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="openToPlay">
+                        <label for="openToPlay" style="margin-bottom: 0;">Open to playing with new connections</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="margin-top: 24px;">Complete Profile</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Main Feed Screen -->
+        <div id="feedScreen" class="hidden">
+            <div class="header">
+                <h1>FairwayConnect</h1>
+            </div>
+            <div class="content" id="feedContent">
+                <!-- Profile cards will be inserted here -->
+            </div>
+            <div class="bottom-nav">
+                <div class="nav-item active" onclick="showFeed()">
+                    <div class="nav-icon">🏠</div>
+                    <div class="nav-label">Discover</div>
+                </div>
+                <div class="nav-item" onclick="showMyProfile()">
+                    <div class="nav-icon">👤</div>
+                    <div class="nav-label">Profile</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Detail Screen -->
+        <div id="detailScreen" class="hidden">
+            <div class="header">
+                <button class="header-back" onclick="showFeed()">←</button>
+                <h1>Profile</h1>
+                <div style="width: 32px;"></div>
+            </div>
+            <div class="content">
+                <div class="profile-detail" id="detailContent">
+                    <!-- Detail content will be inserted here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- My Profile Screen -->
+        <div id="myProfileScreen" class="hidden">
+            <div class="header">
+                <button class="header-back" onclick="showFeed()">←</button>
+                <h1>My Profile</h1>
+                <div style="width: 32px;"></div>
+            </div>
+            <div class="content">
+                <div class="profile-detail" id="myProfileContent">
+                    <!-- My profile content will be inserted here -->
+                </div>
+            </div>
+            <div class="bottom-nav">
+                <div class="nav-item" onclick="showFeed()">
+                    <div class="nav-icon">🏠</div>
+                    <div class="nav-label">Discover</div>
+                </div>
+                <div class="nav-item active">
+                    <div class="nav-icon">👤</div>
+                    <div class="nav-label">Profile</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Round Request Modal -->
+        <div id="requestModal" class="modal-overlay">
+            <div class="modal">
+                <h3>Request a Round</h3>
+                <div id="requestRecipient"></div>
+                <div class="form-group">
+                    <label>Preferred Date</label>
+                    <input type="date" id="requestDate">
+                </div>
+                <div class="form-group">
+                    <label>Course Preference</label>
+                    <input type="text" id="requestCourse" placeholder="Your home course or theirs?">
+                </div>
+                <div class="form-group">
+                    <label>Message (Optional)</label>
+                    <textarea id="requestMessage" placeholder="Looking forward to connecting on the course..."></textarea>
+                </div>
+                <button class="btn btn-primary" onclick="sendRequest()">Send Request</button>
+                <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample data
+        const sampleProfiles = [
+            {
+                id: 1,
+                name: "Sarah Chen",
+                title: "CEO",
+                company: "TechVentures",
+                industry: "Technology",
+                handicap: 8,
+                homeCourse: "Torrey Pines",
+                bio: "Serial entrepreneur passionate about startups and golf. Always looking to connect with founders and investors.",
+                interests: ["Venture Capital", "AI/ML", "Startups"],
+                openToPlay: true,
+                rounds: 142
+            },
+            {
+                id: 2,
+                name: "Michael Rodriguez",
+                title: "Partner",
+                company: "Summit Capital",
+                industry: "Finance",
+                handicap: 14,
+                homeCourse: "Pebble Beach",
+                bio: "Private equity investor focused on growth companies. Love talking deals between holes.",
+                interests: ["Private Equity", "M&A", "SaaS"],
+                openToPlay: true,
+                rounds: 98
+            },
+            {
+                id: 3,
+                name: "Jennifer Park",
+                title: "VP of Sales",
+                company: "CloudScale",
+                industry: "Technology",
+                handicap: 11,
+                homeCourse: "Spyglass Hill",
+                bio: "Enterprise sales leader. Golf is where I build the best client relationships.",
+                interests: ["Enterprise Software", "Sales Strategy"],
+                openToPlay: true,
+                rounds: 76
+            },
+            {
+                id: 4,
+                name: "David Thompson",
+                title: "Founder & CEO",
+                company: "PropTech Solutions",
+                industry: "Real Estate",
+                handicap: 16,
+                homeCourse: "Bay Hill Club",
+                bio: "Real estate tech founder. Looking to network with other entrepreneurs and investors.",
+                interests: ["Real Estate", "PropTech", "Angel Investing"],
+                openToPlay: true,
+                rounds: 54
+            }
+        ];
+
+        let currentUser = null;
+        let selectedProfile = null;
+
+        function showOnboarding() {
+            hideAll();
+            document.getElementById('onboardingScreen').classList.remove('hidden');
+        }
+
+        function showProfileSetup() {
+            hideAll();
+            document.getElementById('profileSetupScreen').classList.remove('hidden');
+        }
+
+        function showFeed() {
+            hideAll();
+            document.getElementById('feedScreen').classList.remove('hidden');
+            renderFeed();
+        }
+
+        function showMyProfile() {
+            hideAll();
+            document.getElementById('myProfileScreen').classList.remove('hidden');
+            renderMyProfile();
+        }
+
+        function showDetail(profile) {
+            selectedProfile = profile;
+            hideAll();
+            document.getElementById('detailScreen').classList.remove('hidden');
+            renderDetail(profile);
+        }
+
+        function hideAll() {
+            const screens = ['onboardingScreen', 'profileSetupScreen', 'feedScreen', 'detailScreen', 'myProfileScreen'];
+            screens.forEach(screen => {
+                document.getElementById(screen).classList.add('hidden');
+            });
+        }
+
+        function getInitials(name) {
+            return name.split(' ').map(n => n[0]).join('');
+        }
+
+        function renderFeed() {
+            const feedContent = document.getElementById('feedContent');
+            
+            if (!currentUser) {
+                feedContent.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">⛳</div>
+                        <p>Complete your profile to start discovering golfers in your network</p>
+                    </div>
+                `;
+                return;
+            }
+
+            feedContent.innerHTML = sampleProfiles.map(profile => `
+                <div class="profile-card" onclick='showDetail(${JSON.stringify(profile)})'>
+                    <div class="profile-header">
+                        <div class="avatar">${getInitials(profile.name)}</div>
+                        <div class="profile-info">
+                            <h3>${profile.name}</h3>
+                            <div class="role">${profile.title} at ${profile.company}</div>
+                            <span class="handicap-badge">Handicap ${profile.handicap}</span>
+                        </div>
+                    </div>
+                    <div class="profile-details">
+                        <div class="detail-item">
+                            <span>🏌️</span>
+                            <span>${profile.homeCourse}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span>💼</span>
+                            <span>${profile.industry}</span>
+                        </div>
+                    </div>
+                    <div class="profile-bio">${profile.bio}</div>
+                    <div class="profile-tags">
+                        ${profile.interests.map(interest => `<span class="tag">${interest}</span>`).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderDetail(profile) {
+            document.getElementById('detailContent').innerHTML = `
+                <div class="detail-avatar">${getInitials(profile.name)}</div>
+                <div class="detail-name">${profile.name}</div>
+                <div class="detail-role">${profile.title} at ${profile.company}</div>
+                
+                <div class="detail-stats">
+                    <div class="stat">
+                        <div class="stat-value">${profile.handicap}</div>
+                        <div class="stat-label">Handicap</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">${profile.rounds}</div>
+                        <div class="stat-label">Rounds</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">2.5</div>
+                        <div class="stat-label">Avg Score</div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">About</div>
+                    <div class="section-content">${profile.bio}</div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">Home Course</div>
+                    <div class="section-content">🏌️ ${profile.homeCourse}</div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">Industry & Interests</div>
+                    <div class="section-content">
+                        <div class="profile-tags">
+                            <span class="tag">${profile.industry}</span>
+                            ${profile.interests.map(interest => `<span class="tag">${interest}</span>`).join('')}
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary" onclick="openRequestModal()">Request a Round</button>
+            `;
+        }
+
+        function renderMyProfile() {
+            if (!currentUser) return;
+            
+            document.getElementById('myProfileContent').innerHTML = `
+                <div class="detail-avatar">${getInitials(currentUser.name)}</div>
+                <div class="detail-name">${currentUser.name}</div>
+                <div class="detail-role">${currentUser.title}${currentUser.company ? ' at ' + currentUser.company : ''}</div>
+                
+                <div class="detail-stats">
+                    <div class="stat">
+                        <div class="stat-value">${currentUser.handicap}</div>
+                        <div class="stat-label">Handicap</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">0</div>
+                        <div class="stat-label">Connections</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">0</div>
+                        <div class="stat-label">Rounds</div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">About</div>
+                    <div class="section-content">${currentUser.bio || 'No bio yet'}</div>
+                </div>
+
+                ${currentUser.homeCourse ? `
+                <div class="section">
+                    <div class="section-title">Home Course</div>
+                    <div class="section-content">🏌️ ${currentUser.homeCourse}</div>
+                </div>
+                ` : ''}
+
+                <div class="section">
+                    <div class="section-title">Industry & Interests</div>
+                    <div class="section-content">
+                        <div class="profile-tags">
+                            <span class="tag">${currentUser.industry}</span>
+                            ${currentUser.interests ? currentUser.interests.map(interest => `<span class="tag">${interest}</span>`).join('') : ''}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">Availability</div>
+                    <div class="section-content">
+                        ${currentUser.openToPlay ? '✅ Open to playing with new connections' : '⏸️ Not currently looking for new rounds'}
+                    </div>
+                </div>
+            `;
+        }
+
+        function openRequestModal() {
+            if (!selectedProfile) return;
+            
+            document.getElementById('requestRecipient').innerHTML = `
+                <div style="margin-bottom: 16px; padding: 12px; background: #f5f5f5; border-radius: 8px;">
+                    <strong>To:</strong> ${selectedProfile.name}
+                </div>
+            `;
+            
+            // Set default date to tomorrow
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            document.getElementById('requestDate').value = tomorrow.toISOString().split('T')[0];
+            
+            document.getElementById('requestModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('requestModal').classList.remove('active');
+        }
+
+        function sendRequest() {
+            // In a real app, this would send to a backend
+            alert(`Round request sent to ${selectedProfile.name}! They'll receive a notification.`);
+            closeModal();
+            showFeed();
+        }
+
+        // Handle profile form submission
+        document.getElementById('profileForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const interests = document.getElementById('interests').value
+                .split(',')
+                .map(i => i.trim())
+                .filter(i => i);
+            
+            currentUser = {
+                name: document.getElementById('fullName').value,
+                title: document.getElementById('title').value,
+                company: document.getElementById('company').value,
+                industry: document.getElementById('industry').value,
+                handicap: parseInt(document.getElementById('handicap').value),
+                homeCourse: document.getElementById('homeCourse').value,
+                bio: document.getElementById('bio').value,
+                interests: interests,
+                openToPlay: document.getElementById('openToPlay').checked
+            };
+            
+            showFeed();
+        });
+
+        // Initialize
+        showOnboarding();
+    </script>
+</body>
+</html>
